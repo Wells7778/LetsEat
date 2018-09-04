@@ -1,5 +1,5 @@
 class PurchasesController < ApplicationController
-  before_action :set_purchase, only: [:show, :edit, :update, :destroy, :edit_order, :show_orders]
+  before_action :set_purchase, only: [:show, :edit, :update, :destroy, :edit_order, :show_orders, :close]
 
   def index
     @purchases = Purchase.enable.page(params[:page]).per(10)
@@ -61,6 +61,18 @@ class PurchasesController < ApplicationController
   def show_orders
     @orders = @purchase.orders.includes(:order_items, :user)
   end
+
+  def close
+    if @purchase.owner?(current_user)
+      @purchase.close
+      flash[:notice] = "已關閉訂餐"
+      redirect_to show_orders_purchase_path(@purchase)
+    else
+      flash[:alert] = "這不是你開的團喔"
+      redirect_to root_path
+    end
+  end
+
 
   private
 

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     member do
       get  :edit_order
       get  :show_orders
+      post :close
     end
   end
   resources :orders, only: [:create, :update, :destroy]

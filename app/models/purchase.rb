@@ -11,4 +11,9 @@ class Purchase < ApplicationRecord
   def owner?(user)
     self.user_id == user.id
   end
+
+  def close
+    self.update(is_enable: false)
+  end
+
 end

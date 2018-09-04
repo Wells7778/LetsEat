@@ -8,6 +8,15 @@
     總金額：
     ＄<%= @purchase.total_price %>
   </h1>
+  <% if @purchase.is_enable %>
+    <div class="d-flex justify-content-end mb-3">
+      <%= link_to "提前關閉",
+                  close_purchase_path(@purchase),
+                  method: :post,
+                  data: { confirm: "確定關閉點餐？" },
+                  class: "btn btn-outline-danger" %>
+    </div>
+  <% end %>
   <div class="row">
     <div class="col-xs-10 offset-xs-1 col-sm-8 offset-sm-2">
       <table class="table">
