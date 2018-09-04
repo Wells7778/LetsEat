@@ -1,0 +1,11 @@
+<div class="nested-fields border border-dark rounded form-inline mb-2">
+  <div class="p-2 col-6">
+    <%= f.text_field :name, placeholder: "品項", class: "form-control" %>
+  </div>
+  <div class="p-2 col-3">
+    <%= f.number_field :price, placeholder: "價格", class: "form-control" %>
+  </div>
+  <div class="p-2 col-3 text-right">
+    <%= link_to_remove_association "移除品項", f, class: "btn btn-danger btn-sm" %>
+  </div>
+</div>

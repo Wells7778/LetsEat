@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3">
+      <div class="card w-100 mt-3">
+        <%= image_tag @menu.file_location.url, class: "w-100 img-thumbnail" if @menu.file_location.url %>
+        <div class="card-body">
+          <h5 class="card-title"><%= @menu.name %></h5>
+          <p class="card-text">電話：<%= @menu.phonenumber %></p>
+          <p class="card-text">備註：<%= @menu.description %></p>
+          <ul class="list-group mb-3">
+            <% @products.each do |product| %>
+              <li class="list-group-item text-center"><%= product.name %>   $ <%= product.price %></li>
+            <% end %>
+          </ul>
+          <div class="d-flex justify-content-end">
+            <%= link_to "回列表", admin_menus_path, class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
