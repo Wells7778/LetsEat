@@ -7,4 +7,13 @@ Rails.application.routes.draw do
     resources :menus
     root "users#index"
   end
+
+  resources :purchases do
+    member do
+      get  :edit_order
+      post :update_order
+    end
+  end
+  resources :orders, only: [:create, :update, :destroy]
+  root "purchases#index"
 end
