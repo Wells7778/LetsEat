@@ -19,4 +19,7 @@ class User < ApplicationRecord
     self.role == "admin"
   end
 
+  def has_order?(purchase)
+    purchase.orders.pluck(:user_id).include?(self.id)
+  end
 end

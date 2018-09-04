@@ -10,7 +10,7 @@
 
   <body class="bg-light">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <%= link_to "Let's Eat", "", class: "navbar-brand" %>
+      <%= link_to "Let's Eat", root_path, class: "navbar-brand" %>
       <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
           aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -24,7 +24,7 @@
               </li>
             <% end %>
             <li class="nav-item">
-              <%= link_to "開團", "", class:"nav-link" %>
+              <%= link_to "開團", new_purchase_path, class:"nav-link" %>
             </li>
             <li class="nav-item">
               <%= link_to "登出", destroy_user_session_path, method: :delete, class: "nav-link" %>

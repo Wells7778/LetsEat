@@ -1,0 +1,69 @@
+<div class="jumbotron jumbotron-fluid jumbotron-bg d-flex align-items-end jumbotron-custom">
+  <div class="container">
+    <div class="p-3 bg-lighter bg-custom">
+      <h1 class="display-3 font-weight-bold">訂便當</h1>
+      <p class="lead">只定好吃便當.只好吃便當.只吃便當.吃便當.便當.胖</p>
+    </div>
+  </div>
+</div>
+<div class="container main-contant mb-1">
+  <div class="row">
+    <!-- 主要商品列表 (Card) -->
+    <div class="col-xs-10 offset-xs-1 col-sm-12">
+      <div class="row">
+        <% @purchases.each do |purchase| %>
+          <div class="col-md-4 mb-4">
+            <div class="card border round box-shadow text-center h-100">
+              <%= image_tag purchase.menu.file_location , class: "card-img-top" %>
+              <div class="card-body p-2">
+                <span class="badge badge-success badge-pill">
+                  <%= purchase.menu.category.name %>
+                </span>
+                <h4 class="card-title">
+                  <%= purchase.name %>
+                </h4>
+                <p class="card-text">日期： <%= purchase.open_date.strftime("%Y-%m-%d") %></p>
+                <p class="card-text">截止時間： <br/>
+                <%= purchase.deadline.strftime("%Y-%m-%d %H:%M") %></p>
+              </div>
+              <div class="card-footer border-top-0 bg-white p-2">
+                <div class="btn-group btn-group-sm">
+                  <%= link_to "訂購餐點", purchase_path(purchase), class: "btn btn-primary btn-sm" %>
+                </div>
+                <% if purchase.owner?(current_user) %>
+                  <div class="btn-group btn-group-sm">
+                    <%= link_to "編輯", edit_purchase_path(purchase), class: "btn btn-primary btn-sm btn-warning" %>
+                  </div>
+                  <div class="btn-group btn-group-sm">
+                    <%= link_to "刪除", purchase_path(purchase), method: :delete, data: { confirm: "Are you Sure?" }, class: "btn btn-primary btn-sm  btn-danger" %>
+                  </div>
+                <% end %>
+                <div class="btn-group btn-group-sm">
+                  <%= link_to "顯示訂餐紀錄", show_orders_purchase_path(purchase), class: "btn btn-primary btn-sm btn-warning" %>
+                </div>
+                <% if current_user.has_order?(purchase) %>
+                  <div class="btn-group btn-group-sm">
+                    <%= link_to "修改訂餐紀錄", edit_order_purchase_path(purchase), class: "btn btn-primary btn-sm btn-info" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <!-- pagination -->
+    <%= paginate @purchases %>
+  </div>
+</div>
+<footer class="bg-light text-muted py-5">
+  <div class="container">
+    <ul class="list-inline text-center">
+      <li class="list-inline-item">© Copright 2018 JoinEat</li>
+      <li class="list-inline-item">
+        <a class="text-info" href="#">About</a>
+      </li>
+    </ul>
+    <p class="text-center">Made with Bootstrap4</p>
+  </div>
+</footer>

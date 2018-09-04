@@ -1,0 +1,21 @@
+<div class="nested-fields border border-dark rounded form-row mb-2 p-2">
+  <div class="form-group col-xs-12 col-sm-8">
+    <%= f.label :name, "餐點名稱" %>
+    <%= f.text_field :name, placeholder: "餐點名稱", class: "form-control" %>
+  </div>
+  <div class="form-group col-xs-12 col-sm-4">
+    <%= f.label :price, "價格" %>
+    <%= f.number_field :price, placeholder: "價格", class: "form-control" %>
+  </div>
+  <div class="form-group col-xs-12 col-sm-3">
+    <%= f.label :qty, "數量" %>
+    <%= f.number_field :qty, placeholder: "數量", class: "form-control" %>
+  </div>
+  <div class="form-group col-xs-12 col-sm-6">
+    <%= f.label :note, "備註" %>
+    <%= f.text_field :note, placeholder: "備註", class: "form-control" %>
+  </div>
+  <div class="col-xs-12 col-sm-3 d-flex justify-content-center align-items-center">
+    <%= link_to_remove_association "移除此項", f, class: "btn btn-danger" %>
+  </div>
+</div>

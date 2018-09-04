@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2 border border-primary rounded bg-light mt-5">
+      <h1 class="mt-3">開團吃飯！！！</h1>
+      <%= form_for purchase, html: {class: "mt-5" } do |f| %>
+        <div class="form-group mb-3">
+          <%= f.collection_select :menu_id, Menu.all, :id, :name, { prompt: "選擇菜單" }, { class: "form-control" } %>
+        </div>
+        <div class="form-group mb-3">
+          <%= f.text_field :name, placeholder: "輸入餐點名稱 例：8/31 午餐", class: "form-control" %>
+        </div>
+        <div class="form-group mb-3">
+          <%= f.label :open_date, "餐點日期" %>
+          <%= f.date_select :open_date, class: "form-control" %>
+        </div>
+        <div class="form-group mb-3">
+          <%= f.label :deadline, "截止時間" %>
+          <%= f.datetime_select :deadline, class: "form-control" %>
+        </div>
+        <div class="form-check mb-3">
+          <%= f.check_box :is_enable, class: "form-check-input", checked: true %>
+          <%= f.label :is_enable, "是否啟用", class: "form-check-label" %>
+        </div>
+        <div class="form-group mb-3">
+          <%= f.submit "送出", class: "btn btn-outline-primary w-100" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
