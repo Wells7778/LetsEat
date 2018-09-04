@@ -5,8 +5,8 @@
     <div class="col-xs-12 col-sm-6 offset-sm-3 border border-light rounded p-3">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-group mb-3 ">
-          <%= f.label :user_code, "員工編號" %><br />
-          <%= f.text_field :user_code, autofocus: true, class: "form-control" %>
+          <%= f.label :code_number, "員工編號" %><br />
+          <%= f.text_field :code_number, autofocus: true, class: "form-control" %>
         </div>
 
         <div class="form-group mb-3">
