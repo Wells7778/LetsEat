@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180904133009) do
+ActiveRecord::Schema.define(version: 20180904135536) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
@@ -28,10 +28,40 @@ ActiveRecord::Schema.define(version: 20180904133009) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "price", null: false
+    t.integer "qty", default: 1, null: false
+    t.string "note"
+    t.integer "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "purchase_id"
+    t.integer "total_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name", null: false
     t.integer "price", null: false
     t.integer "menu_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "purchases", force: :cascade do |t|
+    t.date "open_date"
+    t.string "name"
+    t.datetime "deadline"
+    t.boolean "is_enable"
+    t.integer "total_price"
+    t.integer "menu_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  open_date: 2018-09-04
+  name: MyString
+  deadline: 2018-09-04 21:48:34
+  is_enable: false
+  menu_id: 1
+  user_id: 1
+
+two:
+  open_date: 2018-09-04
+  name: MyString
+  deadline: 2018-09-04 21:48:34
+  is_enable: false
+  menu_id: 1
+  user_id: 1
