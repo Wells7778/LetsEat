@@ -73,6 +73,9 @@ class PurchasesController < ApplicationController
     end
   end
 
+  def my
+    @purchases = current_user.purchases.includes(:menu, :orders, :user)
+  end
 
   private
 

@@ -14,6 +14,9 @@ Rails.application.routes.draw do
       get  :show_orders
       post :close
     end
+    collection do
+      get  :my
+    end
   end
   resources :orders, only: [:create, :update, :destroy]
   root "purchases#index"
