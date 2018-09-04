@@ -1,4 +1,9 @@
 class OrdersController < ApplicationController
+
+  def index
+    @purchases = current_user.order_purchases.includes(:menu).uniq
+  end
+
   def create
     @order = current_user.orders.build(order_params)
     @order.total_price = update_total_price

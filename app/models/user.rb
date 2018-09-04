@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :purchases
   has_many :orders
 
+  has_many :order_purchases, through: :orders, source: :purchase
+
   validates :email, uniqueness: true
   validates :code_number, uniqueness: true
 
