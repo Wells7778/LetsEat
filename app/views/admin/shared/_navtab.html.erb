@@ -1,0 +1,19 @@
+<div class="navtab my-3">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <%= link_to_unless_current "User List", admin_users_path, class: "nav-link" do %>
+        <%= link_to "User List", admin_users_path, class: "nav-link active" %>
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to_unless_current "Category", admin_categories_path, class: "nav-link" do %>
+        <%= link_to "Category", "", class: "nav-link active" %>
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to_unless_current "Menu", admin_menus_path, class: "nav-link" do %>
+        <%= link_to "Menu", "", class: "nav-link active" %>
+      <% end %>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <%= render partial: "admin/shared/navtab" %>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3">
+      <table class="user-table table table-striped">
+        <thead>
+          <tr>
+            <th style="width: 25%;" class="text-center">員工編號</th>
+            <th style="width: 25%;" class="text-center">姓名</th>
+            <th style="width: 50%;" class="text-center">身份修改</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td class="align-middle text-center"><%= user.code_number %></td>
+              <td class="align-middle text-center"><%= user.name %></td>
+              <td class="align-middle">
+                <%= form_tag admin_user_path(user), method: :patch, class: "form-inline" do %>
+                  <%= select_tag :role, options_for_select(User::ROLE.map(&:reverse), user.role), class: "form-control" %>
+                  <%= submit_tag "Update", class: "btn btn-primary btn-sm ml-3" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
