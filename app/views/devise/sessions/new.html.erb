@@ -1,26 +1,32 @@
-<h2>Log in</h2>
+<div class="container">
+  <h2 class="mb-1 mt-3 text-center">登入</h2>
+  <p class="text-center text-muted mb-5">登入開始訂好吃便當</p>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 offset-sm-3 border border-light rounded p-3">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="form-group mb-3 ">
+          <%= f.label :user_code, "員工編號" %><br />
+          <%= f.text_field :user_code, autofocus: true, class: "form-control" %>
+        </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+        <div class="form-group mb-3">
+          <%= f.label :password, "密碼" %><br />
+          <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+        </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+        <% if devise_mapping.rememberable? -%>
+          <div class="form-group mb-3">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me, "記住我" %>
+          </div>
+        <% end -%>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+        <div class="form-group mb-3">
+          <%= f.submit "登入", class: "btn btn-primary btn-lg w-100" %>
+        </div>
+      <% end %>
+
+      <%= render "devise/shared/links" %>
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
