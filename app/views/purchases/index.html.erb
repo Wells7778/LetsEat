@@ -22,7 +22,8 @@
                 <h4 class="card-title">
                   <%= purchase.name %>
                 </h4>
-                <p class="card-text">日期： <%= purchase.open_date.strftime("%Y-%m-%d") %></p>
+                <p class="card-text">開團人： <%= purchase.user.name %></p>
+                <p class="card-text">開團日期： <%= purchase.open_date.strftime("%Y-%m-%d") %></p>
                 <p class="card-text">截止時間： <br/>
                 <%= purchase.deadline.strftime("%Y-%m-%d %H:%M") %></p>
               </div>
