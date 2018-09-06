@@ -27,7 +27,7 @@
             <th>價格</th>
             <th>數量</th>
             <th>備註</th>
-            <th>#</th>
+            <th>付款狀態</th>
           </tr>
         </thead>
         <tbody>
@@ -45,26 +45,26 @@
                 <% end %>
               </td>
               <td>
-              <% order.order_items.each do |item| %>
-                <p><%= item.name %></p>
-              <% end %>
+                <% order.order_items.each do |item| %>
+                  <p><%= item.name %></p>
+                <% end %>
               <td>
-              <% order.order_items.each do |item| %>
-                <p>＄<%= item.price %></p>
-              <% end %>
+                <% order.order_items.each do |item| %>
+                  <p>＄<%= item.price %></p>
+                <% end %>
               </td>
               <td>
-              <% order.order_items.each do |item| %>
-                <p><%= item.qty %></p>
-              <% end %>
+                <% order.order_items.each do |item| %>
+                  <p><%= item.qty %></p>
+                <% end %>
               </td>
               <td>
-              <% order.order_items.each do |item| %>
-                <p><%= item.note %></p>
-              <% end %>
+                <% order.order_items.each do |item| %>
+                  <p><%= item.note %></p>
+                <% end %>
               </td>
               <td>
-
+                <%= "已付" if order.is_paid %>
               </td>
             </tr>
           <% end %>
