@@ -40,6 +40,9 @@
                     ＄<%= order.total_price %>
                   </span>
                 </h6>
+                <% if order.user == current_user && order.purchase.is_enable %>
+                  <%= link_to "修改", edit_order_purchase_path(order.purchase), class: "btn btn-secondary btn-sm" %>
+                <% end %>
               </td>
               <td>
               <% order.order_items.each do |item| %>
