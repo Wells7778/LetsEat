@@ -7,9 +7,14 @@ class PurchasesController < ApplicationController
   end
 
   def show
-    @menu = @purchase.menu
-    @products = @menu.products
-    @order = Order.new
+    if @purchase.is_enable
+      @menu = @purchase.menu
+      @products = @menu.products
+      @order = Order.new
+    else
+      flash[:alert] = "此團已結束"
+      redirect_to root_path
+    end
   end
 
   def new
@@ -48,18 +53,47 @@ class PurchasesController < ApplicationController
   end
 
   def edit_order
-    if current_user.has_order?(@purchase)
-      @menu = @purchase.menu
-      @products = @menu.products
-      @order = @purchase.orders.find_by(user_id: current_user.id)
+    if @purchase.is_enable
+      if current_user.has_order?(@purchase)
+        @menu = @purchase.menu
+        @products = @menu.products
+        @order = @purchase.orders.find_by(user_id: current_user.id)
+      else
+        flash[:alert] = "尚未訂餐，請點選訂餐"
+        redirect_to root_path
+      end
     else
-      flash[:alert] = "尚未訂餐，請點選訂餐"
+      flash[:alert] = "此團已關閉"
       redirect_to root_path
     end
   end
 
   def show_orders
-    @orders = @purchase.orders.includes(:order_items, :user)
+    if @purchase.owner?(current_user) || current_user.has_order?(@purchase)
+      @orders = @purchase.orders.includes(:order_items, :user)
+      @order_items = @purchase.order_items.pluck(:name, :note, :qty)
+      @total_items = {}
+      @order_items.each do |item|
+        if @total_items[item.first].nil?
+          if item.second.blank?
+            @total_items[item.first] = ["正常", item.last]
+          else
+            @total_items[item.first] = [item.second, item.last]
+          end
+        else
+          @total_items[item.first][1] += item.last
+          if item.second.blank?
+            @total_items[item.first][0] += "& 正常"
+          else
+            @total_items[item.first][0] += "& #{item.second}"
+          end
+        end
+      end
+      puts @total_items
+    else
+      flash[:alert] = "非開團者或未定餐"
+      redirect_to root_path
+    end
   end
 
   def close

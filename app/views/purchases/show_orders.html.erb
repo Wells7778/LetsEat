@@ -67,6 +67,26 @@
           <% end %>
         </tbody>
       </table>
+      <h3>統計</h3>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>品項</th>
+            <th>數量</th>
+            <th>備註</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @total_items.each do |name,content| %>
+            <tr>
+              <td><%= name %></td>
+              <td><%= content.last %></td>
+              <td><%= content.first %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
     </div>
   </div>
 </div>
