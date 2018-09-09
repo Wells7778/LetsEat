@@ -11,7 +11,8 @@ class OrdersController < ApplicationController
       flash[:notice] = "已訂購，總金額共#{@order.total_price}"
       redirect_to root_path
     else
-
+      flash[:alert] = @order.errors.full_messages.to_sentence
+      redirect_to root_path
     end
   end
 
