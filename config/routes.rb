@@ -18,6 +18,8 @@ Rails.application.routes.draw do
       get  :my
     end
   end
-  resources :orders, only: [:index, :create, :update, :destroy]
+  resources :orders, only: [:index, :create, :update, :destroy] do
+    resources :payments, except: [:index, :edit, :update, :destroy]
+  end
   root "purchases#index"
 end
