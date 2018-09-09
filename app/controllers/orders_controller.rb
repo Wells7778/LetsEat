@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
     @order.total_price = update_total_price
     if @order.save
       flash[:notice] = "已訂購，總金額共#{@order.total_price}"
-      redirect_to root_path
+      redirect_to show_orders_purchase_path(@order.purchase)
     else
       flash[:alert] = @order.errors.full_messages.to_sentence
       redirect_to root_path
@@ -17,11 +17,16 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order = Purchase.find_by(id: params[:id]).orders.find_by(user_id: current_user.id)
+    @order = Order.find_by(id: params[:id])
+    @o_price = @order.total_price
+    @order.total_price = update_total_price
+    if @order.is_paid
+      @order.update_payment_diff(@o_price)
+    end
     @order.total_price = update_total_price
     if @order.update(order_params)
       flash[:notice] = "修改訂購，總金額共#{@order.total_price}"
-      redirect_to root_path
+      redirect_to show_orders_purchase_path(@order.purchase)
     else
       flash[:alert] = @order.errors.full_messages.to_sentence
       render "purchases#edit_order"

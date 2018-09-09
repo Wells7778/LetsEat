@@ -16,7 +16,7 @@
               <td><%= purchase.open_date.strftime("%Y-%m-%d") %></td>
               <td><%= purchase.menu.category.name %></td>
               <td><%= purchase.name %></td>
-              <td><%= !purchase.is_enable %></td>
+              <td><%= purchase.is_enable ? "開啟" : "結束"%></td>
             </tr>
           <% end %>
         </tbody>

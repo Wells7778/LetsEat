@@ -63,8 +63,24 @@
                   <p><%= item.note %></p>
                 <% end %>
               </td>
-              <td>
-                <%= "已付" if order.is_paid %>
+              <td class="align-middle">
+                <% if order.is_paid %>
+                  已付 ＄<%= order.payment.price %>
+                  <% if order.payment.diff > 0 %>
+                    <%= "，需找 ＄#{order.payment.diff}" %>
+                  <% elsif order.payment.diff < 0 %>
+                    <%= "，需再付 ＄#{-1 * order.payment.diff}" %>
+                  <% end %>
+                <% else %>
+                  <% if order.user_id == current_user.id || order.purchase.owner?(current_user)%>
+                    <%= form_for [order, @payment] do |f| %>
+                      <%= f.number_field :price, style: "width: 50px;", required: "true" %>
+                      <%= f.submit "付款", class: "btn btn-info btn-sm" %>
+                    <% end %>
+                  <% else %>
+                    未付款
+                  <% end %>
+                <% end %>
               </td>
             </tr>
           <% end %>

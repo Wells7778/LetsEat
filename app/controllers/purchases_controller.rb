@@ -71,6 +71,7 @@ class PurchasesController < ApplicationController
   def show_orders
     if @purchase.owner?(current_user) || current_user.has_order?(@purchase)
       @orders = @purchase.orders.includes(:order_items, :user)
+      @payment = Payment.new
       @order_items = @purchase.order_items.pluck(:name, :note, :qty)
       @total_items = {}
       @order_items.each do |item|
