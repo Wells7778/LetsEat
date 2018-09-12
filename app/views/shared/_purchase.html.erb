@@ -8,15 +8,22 @@
             <th>分類</th>
             <th>訂餐名稱</th>
             <th>是否結束</th>
+            <th>#</th>
           </tr>
         </thead>
         <tbody>
           <% purchases.each do |purchase| %>
-            <tr data-link="<%= show_orders_purchase_path(purchase) %>">
+            <tr>
               <td><%= purchase.open_date.strftime("%Y-%m-%d") %></td>
               <td><%= purchase.menu.category.name %></td>
               <td><%= purchase.name %></td>
               <td><%= purchase.is_enable ? "開啟" : "結束"%></td>
+              <td>
+                <%= link_to "看團單", show_orders_purchase_path(purchase), class: "btn btn-info btn-sm" %>
+                <% if purchase.owner?(current_user) %>
+                  <%= link_to "編輯", edit_purchase_path(purchase), class: "btn btn-primary btn-sm" %>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>
@@ -24,9 +31,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  $("tr[data-link]").click(function() {
-    window.location = $(this).data("link")
-  })
-</script>
