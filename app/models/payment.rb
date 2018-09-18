@@ -3,7 +3,7 @@ class Payment < ApplicationRecord
 
   validates_presence_of :price
 
-  after_create :update_order_paidte
+  after_create :update_order_paid
   private
   def update_order_paid
     self.order.update(is_paid: true)
